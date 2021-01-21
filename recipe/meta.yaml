@@ -1,7 +1,7 @@
 {% set name = "cppe" %}
 {% set version = "0.3.1" %}
 {% set sha256 = "38d4230ba3ace78936049c23ad4b1fe9e704fd250ec57cc9733cb3904b62cf7c" %}
-{% set build = 0 %}
+{% set build = 1 %}
 
 package:
   name: {{ name|lower }}
@@ -43,8 +43,6 @@ test:
     # Inspect linkage
     - ldd -v $PREFIX/lib/libcppe$SHLIB_EXT        # [linux]
     - otool -L $PREFIX/lib/libcppe$SHLIB_EXT      # [osx]
-    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
-    - conda inspect linkages --show-files --groupby=dependency cppe
     # Verify Python extension library
     - export PYLIB_EXT=`$PYTHON -c 'from numpy import distutils; print(distutils.misc_util.get_shared_lib_extension(is_python_ext=True))'`
     - test -f $SP_DIR/cppe$PYLIB_EXT                                      # [not win]
