@@ -1,7 +1,7 @@
 {% set name = "cppe" %}
 {% set version = "0.3.1" %}
 {% set sha256 = "38d4230ba3ace78936049c23ad4b1fe9e704fd250ec57cc9733cb3904b62cf7c" %}
-{% set build = 2 %}
+{% set build = 3 %}
 
 package:
   name: {{ name|lower }}
