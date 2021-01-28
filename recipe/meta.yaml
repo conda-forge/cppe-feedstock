@@ -1,7 +1,7 @@
 {% set name = "cppe" %}
 {% set version = "0.3.1" %}
 {% set sha256 = "38d4230ba3ace78936049c23ad4b1fe9e704fd250ec57cc9733cb3904b62cf7c" %}
-{% set build = 3 %}
+{% set build = 4 %}
 
 package:
   name: {{ name|lower }}
@@ -13,7 +13,6 @@ source:
 
 build:
   number: {{ build }}
-  skip: true  # [win]
   binary_relocation: true
   run_exports:
     - {{ pin_subpackage('cppe', max_pin='x.x') }}
