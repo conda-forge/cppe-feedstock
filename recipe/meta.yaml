@@ -14,6 +14,7 @@ source:
 build:
   number: {{ build }}
   binary_relocation: true
+  script: "{{ PYTHON }} -m pip install . -vv"
   run_exports:
     - {{ pin_subpackage('cppe', max_pin='x.x') }}
 
@@ -34,6 +35,8 @@ requirements:
 test:
   requires:
     - numpy
+  imports:
+    - cppe
   commands:
     # Verify C++ library
     - test -f $PREFIX/lib/libcppe$SHLIB_EXT                 # [not win]
@@ -49,8 +52,6 @@ test:
     # Inspect linkage
     - ldd -v $SP_DIR/cppe$PYLIB_EXT  # [linux]
     - otool -L $SP_DIR/cppe$PYLIB_EXT  # [osx]
-  imports:
-    - cppe
 
 outputs:
   - name: cppe
