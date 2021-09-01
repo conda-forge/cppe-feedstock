@@ -39,13 +39,13 @@ test:
   imports:
     - cppe
   commands:
-    # Verify C++ library
-    - test -f $PREFIX/lib/libcppe$SHLIB_EXT                 # [not win]
-    - if not exist %PREFIX%\\Library\\bin\\cppe.dll exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\lib\\cppe.lib exit 1  # [win]
-    # Inspect linkage
-    - ldd -v $PREFIX/lib/libcppe$SHLIB_EXT        # [linux]
-    - otool -L $PREFIX/lib/libcppe$SHLIB_EXT      # [osx]
+    ## Verify C++ library
+    #- test -f $PREFIX/lib/libcppe$SHLIB_EXT                 # [not win]
+    #- if not exist %PREFIX%\\Library\\bin\\cppe.dll exit 1  # [win]
+    #- if not exist %PREFIX%\\Library\\lib\\cppe.lib exit 1  # [win]
+    ## Inspect linkage
+    #- ldd -v $PREFIX/lib/libcppe$SHLIB_EXT        # [linux]
+    #- otool -L $PREFIX/lib/libcppe$SHLIB_EXT      # [osx]
     # Verify Python extension library
     - export PYLIB_EXT=`$PYTHON -c 'from numpy import distutils; print(distutils.misc_util.get_shared_lib_extension(is_python_ext=True))'`
     - test -f $SP_DIR/cppe$PYLIB_EXT                                      # [not win]
