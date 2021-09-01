@@ -24,7 +24,7 @@ if errorlevel 1 exit 1
 :: build
 cmake --build build ^
       --config Release ^
-      -- -j %CPU_COUNT% -v -d stats
+      -- -j %CPU_COUNT% -v -d stats -w dupbuild=warn
 if errorlevel 1 exit 1
 
 :: install
