@@ -1,0 +1,86 @@
+diff --git a/cppe/CMakeLists.txt b/cppe/CMakeLists.txt
+index 7bd1b44..15864f6 100644
+--- a/cppe/CMakeLists.txt
++++ b/cppe/CMakeLists.txt
+@@ -15,34 +15,36 @@ if(ENABLE_OPENMP)
+     endif()
+ endif()
+ 
+-list(APPEND CPPE_SOURCES
+-  metadata.cc
+-  utils/string_utils.cc
+-  core/potfile_reader.cc
+-  core/pot_manipulation.cc
+-  core/cppe_state.cc
+-  core/multipole_expansion.cc
+-  core/electric_fields.cc
+-  core/math.cc
+-  core/bmatrix.cc
+-  # tensors
+-  core/tensors/tensors_autogen.cc
+-  core/tensors/tensors_recursive.cc
+-  # fmm
+-  core/fmm/calculate.cc
+-  core/fmm/tree.cc
+-  core/fmm/utils.cc
+-  core/fmm/field_m0.cc
+-  core/fmm/field_m1.cc
+-  core/fmm/field_m2.cc
+-)
+-
+-add_library(cppe
+-  ${CPPE_SOURCES}
+-)
+-
+-
+-target_include_directories(cppe PUBLIC ${EIGEN3_INCLUDE_DIRS})
++add_library(cppeobjs OBJECT)
++
++target_sources(cppeobjs
++  PRIVATE
++    metadata.cc
++    utils/string_utils.cc
++    core/potfile_reader.cc
++    core/pot_manipulation.cc
++    core/cppe_state.cc
++    core/multipole_expansion.cc
++    core/electric_fields.cc
++    core/math.cc
++    core/bmatrix.cc
++    # tensors
++    core/tensors/tensors_autogen.cc
++    core/tensors/tensors_recursive.cc
++    # fmm
++    core/fmm/calculate.cc
++    core/fmm/tree.cc
++    core/fmm/utils.cc
++    core/fmm/field_m0.cc
++    core/fmm/field_m1.cc
++    core/fmm/field_m2.cc
++  )
++
++target_include_directories(cppeobjs SYSTEM PUBLIC ${EIGEN3_INCLUDE_DIRS})
++
++add_library(cppe)
++
++target_link_libraries(cppe PRIVATE cppeobjs)
+ 
+ if(${ENABLE_PYTHON_INTERFACE})
+     message(STATUS "Building Python interface for cppe.")
+@@ -57,7 +59,6 @@ if(${ENABLE_PYTHON_INTERFACE})
+     message(STATUS "${Cyan}Using Python ${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR}${ColourReset}: ${PYTHON_EXECUTABLE}")
+ 
+     pybind11_add_module(pycppe SHARED NO_EXTRAS
+-        ${CPPE_SOURCES}
+         python_iface/export_molecule.cc
+         python_iface/export_potential.cc
+         python_iface/export_fields.cc
+@@ -68,7 +69,7 @@ if(${ENABLE_PYTHON_INTERFACE})
+         python_iface/export_fmm.cc
+         python_iface/export_cppe.cc
+     )
+-    target_include_directories(pycppe PUBLIC ${EIGEN3_INCLUDE_DIRS})
++    target_link_libraries(pycppe PRIVATE cppeobjs)
+     set_target_properties(pycppe PROPERTIES PREFIX "${PYTHON_MODULE_PREFIX}"
+                                             OUTPUT_NAME pycppe
+                                             EXPORT_NAME pycppe

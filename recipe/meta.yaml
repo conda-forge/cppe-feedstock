@@ -10,6 +10,8 @@ package:
 source:
   url: https://github.com/maxscheurer/cppe/archive/v{{ version }}.tar.gz
   sha256: {{ sha256 }}
+  patches:
+    - patches/cmakelists.patch
 
 build:
   number: {{ build }}
@@ -22,8 +24,8 @@ requirements:
     - cmake >=3.5
     - {{ compiler('cxx') }}
     - ninja
-    - llvm-openmp  # [osx]
     - libgomp      # [linux]
+    - llvm-openmp  # [osx or win]
   host:
     - pybind11 >=2.6
     - pybind11-abi
