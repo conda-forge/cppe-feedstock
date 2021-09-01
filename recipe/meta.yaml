@@ -26,6 +26,7 @@ requirements:
     - llvm-openmp  # [osx]
     - libgomp      # [linux]
   host:
+    - pip
     - pybind11 >=2.6
     - pybind11-abi
     - python
