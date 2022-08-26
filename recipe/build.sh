@@ -1,5 +1,5 @@
 # configure
-cmake \
+cmake ${CMAKE_ARGS} \
       -H${SRC_DIR} \
       -Bbuild \
       -GNinja \
