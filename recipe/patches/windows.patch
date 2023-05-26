@@ -1,0 +1,22 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 5d5d359..1e721ca 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -3,7 +3,7 @@ cmake_policy(VERSION 3.0.0)
+ 
+ project(cppe LANGUAGES CXX)
+ 
+-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
++list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+ 
+ include(psi4OptionsTools)
+ option_with_print(BUILD_SHARED_LIBS "Build shared libraries instead of static ones (CMake default is static)" ON)
+@@ -55,7 +55,7 @@ add_subdirectory(external/upstream)
+ 
+ ExternalProject_Add(cppe-core
+    DEPENDS ${pybind_ext}
+-   SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/cppe
++   SOURCE_DIR ${PROJECT_SOURCE_DIR}/cppe
+    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${STAGED_INSTALL_PREFIX}
+               -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+               -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
