@@ -1,7 +1,7 @@
 {% set name = "cppe" %}
 {% set version = "0.3.1" %}
 {% set sha256 = "38d4230ba3ace78936049c23ad4b1fe9e704fd250ec57cc9733cb3904b62cf7c" %}
-{% set build = 9 %}
+{% set build = 10 %}
 
 package:
   name: {{ name|lower }}
@@ -45,7 +45,6 @@ test:
     - scipy
     - pandas
   commands:
-    - pip check
     # Verify C++ library
     - test -f $PREFIX/lib/libcppe$SHLIB_EXT                 # [not win]
     - if not exist %PREFIX%\\Library\\bin\\cppe.dll exit 1  # [win]
@@ -61,6 +60,8 @@ test:
     - ldd -v $SP_DIR/cppe*.so  # [linux]
     - otool -L $SP_DIR/cppe*.so  # [osx]
     - objdump.exe -p %SP_DIR%\\cppe.*.pyd | findstr /i "dll"  # [win]
+    - pip check
+    - pytest --capture=no --log-cli-level=INFO --pyargs cppe
   imports:
     - cppe
 
