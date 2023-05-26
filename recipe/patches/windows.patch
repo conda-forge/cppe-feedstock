@@ -20,3 +20,56 @@ index 5d5d359..1e721ca 100644
     CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${STAGED_INSTALL_PREFIX}
                -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
                -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
+diff --git a/cppe/CMakeLists.txt b/cppe/CMakeLists.txt
+index 7bd1b44..4f9383c 100644
+--- a/cppe/CMakeLists.txt
++++ b/cppe/CMakeLists.txt
+@@ -3,7 +3,6 @@ project(cppe-core VERSION 0.3.1 LANGUAGES CXX)
+ 
+ include(GNUInstallDirs)
+ include(CMakePackageConfigHelpers)
+-include(ExternalProject)
+ 
+ if(ENABLE_OPENMP)
+     find_package(OpenMP)
+@@ -37,12 +36,18 @@ list(APPEND CPPE_SOURCES
+   core/fmm/field_m2.cc
+ )
+ 
+-add_library(cppe
++add_library(cppe-core
+   ${CPPE_SOURCES}
+ )
+ 
++target_include_directories(cppe-core PUBLIC ${EIGEN3_INCLUDE_DIRS})
+ 
+-target_include_directories(cppe PUBLIC ${EIGEN3_INCLUDE_DIRS})
++set_target_properties(
++  cppe-core
++  PROPERTIES
++    POSITION_INDEPENDENT_CODE ON
++    OUTPUT_NAME cppe
++)
+ 
+ if(${ENABLE_PYTHON_INTERFACE})
+     message(STATUS "Building Python interface for cppe.")
+@@ -88,7 +93,7 @@ endif()
+ install(FILES libcppe.hh
+         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PN})
+ 
+-install(TARGETS cppe
++install(TARGETS cppe-core
+         EXPORT "${PN}Targets"
+         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+@@ -110,8 +115,8 @@ if(${ENABLE_PYTHON_INTERFACE})
+         FILES_MATCHING PATTERN "*.py" PATTERN "*.pot" PATTERN "*.hdf5" PATTERN "*.csv")
+ endif()
+ 
+-target_compile_definitions(cppe INTERFACE USING_${PN})
+-target_include_directories(cppe INTERFACE $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
++target_compile_definitions(cppe-core INTERFACE USING_${PN})
++target_include_directories(cppe-core INTERFACE $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+ 
+ set(CMAKECONFIG_INSTALL_DIR "share/cmake/${PN}")
+ configure_package_config_file(cmake/${PN}Config.cmake.in
