@@ -29,6 +29,7 @@ requirements:
     - ninja
     - llvm-openmp  # [osx or win]
     - libgomp      # [linux]
+    - eigen
   host:
     - pybind11
     - pybind11-abi
