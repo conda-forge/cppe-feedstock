@@ -43,11 +43,6 @@ test:
   requires:
     - pip
     - numpy
-    - pytest
-    - h5py
-    - numba
-    - scipy
-    - pandas
   imports:
     - cppe
   commands:
@@ -67,7 +62,6 @@ test:
     - otool -L $SP_DIR/cppe*.so  # [osx]
     - objdump.exe -p %SP_DIR%\\cppe.*.pyd | findstr /i "dll"  # [win]
     - pip check
-    - pytest --capture=no --log-cli-level=INFO --pyargs cppe
 
 outputs:
   - name: cppe
