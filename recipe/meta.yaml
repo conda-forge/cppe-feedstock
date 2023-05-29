@@ -63,21 +63,21 @@ test:
     - objdump.exe -p %SP_DIR%\\cppe.*.pyd | findstr /i "dll"  # [win]
     - pip check
 
-outputs:
-  - name: cppe
-    files:
-      # header files
-      - include/cppe              # [not win]
-      - Library\include\cppe      # [win]
-      # C++ library
-      - lib/libcppe*              # [not win]
-      - Library\bin\cppe*         # [win]
-      - Library\lib\cppe*         # [win]
-      # CMake files
-      - share/cmake/cppe
-      # Python extension
-      - {{ SP_DIR }}/cppe*       # [not win]
-      - Lib\site-packages\cppe*  # [win]
+#outputs:
+#  - name: cppe
+#    files:
+#      # header files
+#      - include/cppe              # [not win]
+#      - Library\include\cppe      # [win]
+#      # C++ library
+#      - lib/libcppe*              # [not win]
+#      - Library\bin\cppe*         # [win]
+#      - Library\lib\cppe*         # [win]
+#      # CMake files
+#      - share/cmake/cppe
+#      # Python extension
+#      - {{ SP_DIR }}/cppe        # [not win]
+#      - Lib\site-packages\cppe   # [win]
 
 about:
   home: https://github.com/maxscheurer/cppe
