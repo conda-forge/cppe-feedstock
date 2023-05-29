@@ -47,12 +47,12 @@ test:
   commands:
     # Verify C++ library
     - test -f $PREFIX/lib/libcppe$SHLIB_EXT                 # [not win]
-    - if not exist %PREFIX%\\Library\\bin\\cppe.dll exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\lib\\cppe.lib exit 1  # [win]
+    - if not exist %PREFIX%\\bin\\cppe.dll exit 1  # [win]
+    - if not exist %PREFIX%\\lib\\cppe.lib exit 1  # [win]
     # Inspect linkage
     - ldd -v $PREFIX/lib/libcppe$SHLIB_EXT        # [linux]
     - otool -L $PREFIX/lib/libcppe$SHLIB_EXT      # [osx]
-    - objdump.exe -p %PREFIX%\\Library\\bin\\cppe.dll | findstr /i "dll"  # [win]
+    - objdump.exe -p %PREFIX%\\bin\\cppe.dll | findstr /i "dll"  # [win]
     # Verify Python extension library
     - test -f $SP_DIR/cppe/pycppe*.so                                       # [not win]
     - if not exist %PREFIX%\\Lib\\site-packages\\cppe\\pycppe.*.pyd exit 1  # [win]
