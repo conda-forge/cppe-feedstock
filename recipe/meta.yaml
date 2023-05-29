@@ -54,12 +54,12 @@ test:
     - otool -L $PREFIX/lib/libcppe$SHLIB_EXT      # [osx]
     - objdump.exe -p %PREFIX%\\Library\\bin\\cppe.dll | findstr /i "dll"  # [win]
     # Verify Python extension library
-    - test -f $SP_DIR/cppe*.so                                      # [not win]
-    - if not exist %PREFIX%\\Lib\\site-packages\\cppe.*.pyd exit 1  # [win]
+    - test -f $SP_DIR/pycppe*.so                                      # [not win]
+    - if not exist %PREFIX%\\Lib\\site-packages\\pycppe.*.pyd exit 1  # [win]
     # Inspect linkage
-    - ldd -v $SP_DIR/cppe*.so  # [linux]
-    - otool -L $SP_DIR/cppe*.so  # [osx]
-    - objdump.exe -p %SP_DIR%\\cppe.*.pyd | findstr /i "dll"  # [win]
+    - ldd -v $SP_DIR/pycppe*.so  # [linux]
+    - otool -L $SP_DIR/pycppe*.so  # [osx]
+    - objdump.exe -p %SP_DIR%\\pycppe.*.pyd | findstr /i "dll"  # [win]
     - pip check
 
 #outputs:
