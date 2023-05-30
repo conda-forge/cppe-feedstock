@@ -43,6 +43,7 @@ test:
   requires:
     - pip
     - numpy
+    - m2w64-binutils
   imports:
     - cppe
   commands:
@@ -53,14 +54,14 @@ test:
     # Inspect linkage
     - ldd -v $PREFIX/lib/libcppe$SHLIB_EXT        # [linux]
     - otool -L $PREFIX/lib/libcppe$SHLIB_EXT      # [osx]
-    #- objdump.exe -p %PREFIX%\\bin\\cppe.dll | findstr /i "dll"  # [win]
+    - objdump.exe -p %PREFIX%\\bin\\cppe.dll | findstr /i "dll"  # [win]
     # Verify Python extension library
     - test -f $SP_DIR/cppe/pycppe*.so                                       # [not win]
     - if not exist %PREFIX%\\Lib\\site-packages\\cppe\\pycppe.*.pyd exit 1  # [win]
     # Inspect linkage
     - ldd -v $SP_DIR/cppe/pycppe*.so  # [linux]
     - otool -L $SP_DIR/cppe/pycppe*.so  # [osx]
-    #- objdump.exe -p %SP_DIR%\\cppe\\pycppe.*.pyd | findstr /i "dll"  # [win]
+    - objdump.exe -p %SP_DIR%\\cppe\\pycppe.*.pyd | findstr /i "dll"  # [win]
     - pip check
 
 about:
