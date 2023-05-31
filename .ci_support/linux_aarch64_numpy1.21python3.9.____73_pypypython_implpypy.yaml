@@ -23,9 +23,12 @@ pin_run_as_build:
 pybind11_abi:
 - '4'
 python:
-- 3.8.* *_cpython
+- 3.9.* *_73_pypy
+python_impl:
+- pypy
 target_platform:
 - linux-aarch64
 zip_keys:
 - - python
   - numpy
+  - python_impl
