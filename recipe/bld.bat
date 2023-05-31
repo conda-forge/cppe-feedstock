@@ -12,7 +12,6 @@ cmake ^
     -DPython_EXECUTABLE:STRING="%PYTHON%" ^
     -DENABLE_OPENMP:BOOL=ON ^
     -DENABLE_ARCH_FLAGS:BOOL=OFF ^
-    -DENABLE_PYTHON_INTERFACE:BOOL=ON ^
     -DPYMOD_INSTALL_FULLDIR:PATH="Lib\site-packages\cppe"
 if errorlevel 1 exit 1
 
