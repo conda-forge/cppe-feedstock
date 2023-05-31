@@ -46,7 +46,7 @@ test:
     - m2w64-binutils  # [win]   # provides objdump.exe
     - pytest
     - numpy
-    - h5py
+    - h5py  # [python_impl != "pypy"]
     - scipy
     - pandas
   imports:
@@ -60,7 +60,7 @@ test:
     - otool -L $SP_DIR/cppe/pycppe*.so  # [osx]
     - objdump.exe -p %SP_DIR%\\cppe\\pycppe.*.pyd | findstr /i "dll"  # [win]
     - pip check
-    - pytest --capture=no --log-cli-level=INFO -m "not needs_polarizationsolver"
+    - pytest --capture=no --log-cli-level=INFO --pyargs cppe -m "not needs_polarizationsolver"  # [python_impl != "pypy"]
 
 about:
   home: https://github.com/maxscheurer/cppe
