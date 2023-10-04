@@ -1,19 +1,15 @@
 {% set name = "cppe" %}
-{% set version = "0.3.1" %}
-{% set sha256 = "38d4230ba3ace78936049c23ad4b1fe9e704fd250ec57cc9733cb3904b62cf7c" %}
-{% set build = 10 %}
+{% set version = "0.3.2" %}
+{% set sha256 = "962389811b11e20ffb0570fe458f0a36c4c1ef09a3ce0a0ae50d132812cd85b1" %}
+{% set build = 0 %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
-#source:
-#  url: https://github.com/maxscheurer/cppe/archive/v{{ version }}.tar.gz
-#  sha256: {{ sha256 }}
-
 source:
-  git_url: https://github.com/maxscheurer/cppe.git
-  git_rev: master
+  url: https://github.com/maxscheurer/cppe/archive/v{{ version }}.tar.gz
+  sha256: {{ sha256 }}
 
 build:
   number: {{ build }}
