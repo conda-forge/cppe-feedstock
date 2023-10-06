@@ -3,8 +3,15 @@ set -ex
 
 export CXX=$(basename ${CXX})
 
+ARCH_ARGS=""
+IS_PYPY=$(${PYTHON} -c "import platform; print(int(platform.python_implementation() == 'PyPy'))")
+
+if [[ $IS_PYPY == 1 ]]; then
+    ARCH_ARGS="-DPython_INCLUDE_DIR={PREFIX}/include/pypy3.9 ${ARCH_ARGS}"
+fi
+
 # configure
-cmake ${CMAKE_ARGS} \
+cmake ${CMAKE_ARGS} ${ARCH_ARGS} \
     -S"${SRC_DIR}" \
     -Bbuild \
     -GNinja \
@@ -13,7 +20,6 @@ cmake ${CMAKE_ARGS} \
     -DCMAKE_CXX_COMPILER:STRING="${CXX}" \
     -DCMAKE_FIND_FRAMEWORK:STRING=NEVER \
     -DCMAKE_FIND_APPBUNDLE:STRING=NEVER \
-    -DPython_ROOT:PATH="${PREFIX}" \
     -DPython_EXECUTABLE:STRING="${PYTHON}" \
     -DENABLE_OPENMP:BOOL=ON \
     -DENABLE_ARCH_FLAGS:BOOL=OFF \
