@@ -3,8 +3,15 @@ set -ex
 
 export CXX=$(basename ${CXX})
 
+ARCH_ARGS=""
+IS_PYPY=$(${PYTHON} -c "import platform; print(int(platform.python_implementation() == 'PyPy'))")
+
+if [[ $IS_PYPY == 1 ]]; then
+    ARCH_ARGS="-DPython_INCLUDE_DIR=${PREFIX}/include/pypy${PY_VER} ${ARCH_ARGS}"
+fi
+
 # configure
-cmake ${CMAKE_ARGS} \
+cmake ${CMAKE_ARGS} ${ARCH_ARGS} \
     -S"${SRC_DIR}" \
     -Bbuild \
     -GNinja \

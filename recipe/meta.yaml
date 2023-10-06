@@ -1,7 +1,7 @@
 {% set name = "cppe" %}
 {% set version = "0.3.2" %}
 {% set sha256 = "962389811b11e20ffb0570fe458f0a36c4c1ef09a3ce0a0ae50d132812cd85b1" %}
-{% set build = 0 %}
+{% set build = 1 %}
 
 package:
   name: {{ name|lower }}
@@ -52,7 +52,7 @@ test:
     - test -f $SP_DIR/cppe/pycppe*.so                                       # [not win]
     - if not exist %PREFIX%\\Lib\\site-packages\\cppe\\pycppe.*.pyd exit 1  # [win]
     # Inspect linkage
-    - ldd -v $SP_DIR/cppe/pycppe*.so  # [linux]
+    - ldd -v $SP_DIR/cppe/pycppe*.so  # [linux64]
     - otool -L $SP_DIR/cppe/pycppe*.so  # [osx]
     - objdump.exe -p %SP_DIR%\\cppe\\pycppe.*.pyd | findstr /i "dll"  # [win]
     - pip check
