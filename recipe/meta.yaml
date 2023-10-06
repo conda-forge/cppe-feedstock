@@ -52,7 +52,7 @@ test:
     - test -f $SP_DIR/cppe/pycppe*.so                                       # [not win]
     - if not exist %PREFIX%\\Lib\\site-packages\\cppe\\pycppe.*.pyd exit 1  # [win]
     # Inspect linkage
-    - ldd -v $SP_DIR/cppe/pycppe*.so  # [linux]
+    - ldd -v $SP_DIR/cppe/pycppe*.so  # [linux64]
     - otool -L $SP_DIR/cppe/pycppe*.so  # [osx]
     - objdump.exe -p %SP_DIR%\\cppe\\pycppe.*.pyd | findstr /i "dll"  # [win]
     - pip check
