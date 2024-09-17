@@ -39,10 +39,9 @@ requirements:
 test:
   requires:
     - pip
-    - numpy
     - m2w64-binutils  # [win]   # provides objdump.exe
     - pytest
-    - numpy
+    - numpy >=1.22,<2.0dev0
     - h5py  # [python_impl != "pypy"]
     - scipy
     - pandas
