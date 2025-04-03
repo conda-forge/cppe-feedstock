@@ -16,6 +16,7 @@ build:
   binary_relocation: true
   run_exports:
     - {{ pin_subpackage('cppe', max_pin='x.x') }}
+  skip: true  # [not linux-64]
 
 requirements:
   build:
@@ -41,7 +42,7 @@ test:
     - pip
     - m2w64-binutils  # [win]   # provides objdump.exe
     - pytest
-    - numpy >=1.22,<2.0dev0
+    - numpy
     - h5py  # [python_impl != "pypy"]
     - scipy
     - pandas
