@@ -9,6 +9,8 @@ package:
 
 source:
   url: https://github.com/maxscheurer/cppe/archive/v{{ version }}.tar.gz
+  patches:
+    - 0001-update-math-call.patch
   sha256: {{ sha256 }}
 
 build:
@@ -16,7 +18,6 @@ build:
   binary_relocation: true
   run_exports:
     - {{ pin_subpackage('cppe', max_pin='x.x') }}
-  skip: true  # [not linux-64]
 
 requirements:
   build:
