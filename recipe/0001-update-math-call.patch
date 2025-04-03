@@ -1,17 +1,22 @@
-From d64180e73b3abe2c3784662d2729d0251173332e Mon Sep 17 00:00:00 2001
+From f70b9810cbe73ebf4fed37f7bee422f61d2a6dcc Mon Sep 17 00:00:00 2001
 From: "Lori A. Burns" <lori.burns@gmail.com>
-Date: Thu, 3 Apr 2025 00:38:21 -0400
+Date: Thu, 3 Apr 2025 01:02:35 -0400
 Subject: [PATCH] update math call
 
 ---
- tests/test_math.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tests/test_math.py | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/tests/test_math.py b/tests/test_math.py
-index 254c738..46b86ad 100644
+index 254c738..ea53f17 100644
 --- a/tests/test_math.py
 +++ b/tests/test_math.py
-@@ -22,7 +22,7 @@ class TestMath(unittest.TestCase):
+@@ -1,3 +1,4 @@
++import math
+ import unittest
+ import pytest
+ import numpy as np
+@@ -22,7 +23,7 @@ class TestMath(unittest.TestCase):
          # factorial
          rng = np.arange(0, 10, 1)
          for a in rng:
