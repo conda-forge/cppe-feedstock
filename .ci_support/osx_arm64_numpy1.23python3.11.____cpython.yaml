@@ -18,6 +18,8 @@ llvm_openmp:
 - '18'
 macos_machine:
 - arm64-apple-darwin20.0.0
+numpy:
+- '1.23'
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -32,4 +34,5 @@ target_platform:
 - osx-arm64
 zip_keys:
 - - python
+  - numpy
   - python_impl
