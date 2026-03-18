@@ -9,8 +9,6 @@ package:
 
 source:
   url: https://github.com/maxscheurer/cppe/archive/v{{ version }}.tar.gz
-  patches:
-    - 0001-update-math-call.patch
   sha256: {{ sha256 }}
 
 build:
