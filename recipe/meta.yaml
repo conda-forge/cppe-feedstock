@@ -30,8 +30,11 @@ requirements:
     - libgomp      # [linux]
     - eigen <5
   host:
+    - pip
     - pybind11
     - pybind11-abi
+    - scikit-build-core >=0.8
+    - setuptools_scm
     - python
   run:
     - python
