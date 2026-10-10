@@ -55,7 +55,8 @@ test:
   commands:
     # Verify Python extension library
     - test -f $SP_DIR/cppe/pycppe*.so                                       # [not win]
-    - if not exist %PREFIX%\\Lib\\site-packages\\cppe\\pycppe.*.pyd exit 1  # [win]
+    - if not exist %PREFIX%\\Lib\\site-packages\\cppe\\pycppe.*.pyd exit 1  # [win and py<315]
+    - if not exist %PREFIX%\\lib\\python\\site-packages\\cppe\\pycppe.*.pyd exit 1  # [win and py>=315]
     # Inspect linkage
     - ldd -v $SP_DIR/cppe/pycppe*.so  # [linux64]
     - otool -L $SP_DIR/cppe/pycppe*.so  # [osx]
